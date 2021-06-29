@@ -5,16 +5,16 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.paypal.redditop.data.database.entities.PostEntity
+import com.paypal.redditop.models.SimplePost
 
 @Dao
 interface PostDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(list: List<PostEntity>)
+    suspend fun insertAll(list: List<SimplePost>)
 
     @Query("SELECT * FROM posts")
-    fun getAllPaged(): PagingSource<Int, PostEntity>
+    fun getAllPaged(): PagingSource<Int, SimplePost>
 
     @Query("DELETE FROM posts")
     suspend fun clearAll()

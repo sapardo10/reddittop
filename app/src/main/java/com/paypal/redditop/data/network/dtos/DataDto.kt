@@ -15,10 +15,9 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 
 
 data class DataDto(
-
 	@SerializedName("modhash") val modhash: String,
 	@SerializedName("dist") val dist: Int,
 	@SerializedName("children") val posts: List<PostDto>,
-	@SerializedName("after") val after: String,
-	@SerializedName("before") val before: String
+	@SerializedName("after") val after: String?,
+	@SerializedName("before") val before: String?
 )
