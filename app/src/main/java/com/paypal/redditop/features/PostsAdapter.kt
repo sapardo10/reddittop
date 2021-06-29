@@ -6,8 +6,10 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.paypal.redditop.databinding.PostItemBinding
 import com.paypal.redditop.models.SimplePost
+import com.paypal.redditop.utils.load
 
-class PostsAdapter : PagingDataAdapter<SimplePost, PostsAdapter.PostsAdapterViewHolder>(SimplePostDiffUtilCallback()) {
+class PostsAdapter :
+    PagingDataAdapter<SimplePost, PostsAdapter.PostsAdapterViewHolder>(SimplePostDiffUtilCallback()) {
 
     /**
      * ------------------------------------- PUBLIC METHODS ----------------------------------------
@@ -28,6 +30,7 @@ class PostsAdapter : PagingDataAdapter<SimplePost, PostsAdapter.PostsAdapterView
 
         fun bind(item: SimplePost) {
             binding.textView.text = item.title
+            binding.image.load(binding.root.context, item.thumbnail)
         }
 
     }
