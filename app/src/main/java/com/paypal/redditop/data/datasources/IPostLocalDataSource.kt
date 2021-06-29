@@ -1,8 +1,8 @@
 package com.paypal.redditop.data.datasources
 
+import androidx.paging.PagingSource
 import com.paypal.redditop.models.SimplePost
-import kotlinx.coroutines.flow.Flow
 
 interface IPostLocalDataSource {
-    fun getAll(): Flow<List<SimplePost>>
+    fun getAll(): PagingSource<Int, SimplePost>
 }

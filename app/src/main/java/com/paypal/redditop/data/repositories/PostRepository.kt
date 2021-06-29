@@ -1,18 +1,30 @@
 package com.paypal.redditop.data.repositories
 
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.paypal.redditop.data.database.PostDao
 import com.paypal.redditop.data.datasources.IPostLocalDataSource
-import com.paypal.redditop.data.datasources.IPostRemoteDataSource
 import com.paypal.redditop.models.SimplePost
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+@ExperimentalPagingApi
 class PostRepository @Inject constructor(
-    private val localDataSource: IPostLocalDataSource,
-    private val remoteDataSource: IPostRemoteDataSource
+    private val remoteMediator: PostsRemoteMediator,
+    private val localDataSource: IPostLocalDataSource
 ) : IPostRepository {
     override fun getAllPosts(): Flow<PagingData<SimplePost>> {
-        return remoteDataSource.getAll()
+        return Pager(
+            PagingConfig(
+                pageSize = 25,
+                enablePlaceholders = false,
+                prefetchDistance = 3
+            ),
+            remoteMediator = remoteMediator,
+            pagingSourceFactory = { localDataSource.getAll() }
+        ).flow
     }
 
 }

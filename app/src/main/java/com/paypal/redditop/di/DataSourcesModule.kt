@@ -1,5 +1,6 @@
 package com.paypal.redditop.di
 
+import com.paypal.redditop.data.database.PostDao
 import com.paypal.redditop.data.datasources.IPostLocalDataSource
 import com.paypal.redditop.data.datasources.IPostRemoteDataSource
 import com.paypal.redditop.data.datasources.PostLocalDataSource
@@ -15,8 +16,12 @@ import dagger.hilt.components.SingletonComponent
 object DataSourceModule {
 
     @Provides
-    fun providePostLocalDataSource(): IPostLocalDataSource {
-        return PostLocalDataSource()
+    fun providePostLocalDataSource(
+        postDao: PostDao
+    ): IPostLocalDataSource {
+        return PostLocalDataSource(
+            postsDao = postDao
+        )
     }
 
     @Provides

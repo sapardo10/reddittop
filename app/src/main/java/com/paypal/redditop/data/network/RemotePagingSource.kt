@@ -13,8 +13,7 @@ class RemotePagingSource(
 
     override suspend fun load(params: LoadParams<String>): LoadResult<String, SimplePost> {
         return try {
-            val response =
-                redditApi.getTopPosts(limit = params.loadSize, after = params.key)
+            val response = redditApi.getTopPosts(limit = params.loadSize, after = params.key)
 
             val redditPosts = response.data.posts.map { it.toSimplePost() }
 
