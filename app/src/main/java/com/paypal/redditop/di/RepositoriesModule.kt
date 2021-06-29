@@ -1,9 +1,9 @@
 package com.paypal.redditop.di
 
-import com.paypal.data.datasources.IPostLocalDataSource
-import com.paypal.data.datasources.IPostRemoteDataSource
-import com.paypal.data.repositories.IPostRepository
-import com.paypal.data.repositories.PostRepository
+import com.paypal.redditop.data.datasources.IPostLocalDataSource
+import com.paypal.redditop.data.datasources.IPostRemoteDataSource
+import com.paypal.redditop.data.repositories.IPostRepository
+import com.paypal.redditop.data.repositories.PostRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,9 +1,10 @@
 package com.paypal.redditop.di
 
-import com.paypal.data.datasources.IPostLocalDataSource
-import com.paypal.data.datasources.IPostRemoteDataSource
-import com.paypal.redditop.datasources.PostLocalDataSource
-import com.paypal.redditop.datasources.PostRemoteDataSource
+import com.paypal.redditop.data.datasources.IPostLocalDataSource
+import com.paypal.redditop.data.datasources.IPostRemoteDataSource
+import com.paypal.redditop.data.datasources.PostLocalDataSource
+import com.paypal.redditop.data.datasources.PostRemoteDataSource
+import com.paypal.redditop.data.network.RedditApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +20,11 @@ object DataSourceModule {
     }
 
     @Provides
-    fun providePostRemoteDataSource(): IPostRemoteDataSource {
-        return PostRemoteDataSource()
+    fun providePostRemoteDataSource(
+        redditApi: RedditApi
+    ): IPostRemoteDataSource {
+        return PostRemoteDataSource(
+            redditApi = redditApi
+        )
     }
 }

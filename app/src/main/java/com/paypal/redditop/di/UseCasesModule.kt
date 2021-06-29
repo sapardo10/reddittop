@@ -1,8 +1,8 @@
 package com.paypal.redditop.di
 
-import com.paypal.data.repositories.IPostRepository
-import com.paypal.domain.GetAllPostUseCase
-import com.paypal.domain.IGetAllPostUseCase
+import com.paypal.redditop.data.repositories.IPostRepository
+import com.paypal.redditop.domain.GetAllPostUseCase
+import com.paypal.redditop.domain.IGetAllPostUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
