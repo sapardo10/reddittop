@@ -48,8 +48,6 @@ class PostsRemoteMediator(
 
             val posts = response.data.posts.map { it.toSimplePost() }
 
-
-
             appDatabase.withTransaction {
                 if (posts.isNotEmpty() && loadKey?.after == null) {
                     postsDao.clearAll()

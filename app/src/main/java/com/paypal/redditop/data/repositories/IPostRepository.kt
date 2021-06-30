@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface IPostRepository {
     fun getAllPosts(): Flow<PagingData<SimplePost>>
+    suspend fun getPost(id: String): SimplePost?
 }

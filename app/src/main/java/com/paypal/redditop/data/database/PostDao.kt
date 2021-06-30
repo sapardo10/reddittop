@@ -16,6 +16,9 @@ interface PostDao {
     @Query("SELECT * FROM posts")
     fun getAllPaged(): PagingSource<Int, SimplePost>
 
+    @Query("SELECT * FROM posts WHERE id = :id")
+    suspend fun getPost(id: String): SimplePost?
+
     @Query("DELETE FROM posts")
     suspend fun clearAll()
 }

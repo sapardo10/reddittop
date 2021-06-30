@@ -3,14 +3,32 @@ package com.paypal.redditop.utils
 import android.content.Context
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 
 
-fun ImageView.load(context: Context, url: String) {
-    Glide.with(context)
-        .load(url)
-        .transform(CenterCrop(), RoundedCorners(25))
+fun ImageView.load(
+    context: Context,
+    url: String,
+    thumbnailUrl: String? = null,
+    cornerRadius: Int? = null,
+    fitCenter: Boolean = false
+) {
+    var builder = Glide.with(context).load(url)
+    thumbnailUrl?.let {
+        builder.thumbnail(
+            Glide.with(context)
+                .load(thumbnailUrl)
+        )
+    }
+
+
+    cornerRadius?.let {
+        builder
+            .transform(RoundedCorners(it))
+    }
+
+    builder
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
         .into(this)
 }
