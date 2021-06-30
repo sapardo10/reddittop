@@ -29,7 +29,10 @@ class PostsRemoteMediator(
     ): MediatorResult {
         return try {
             val loadKey = when (loadType) {
-                LoadType.REFRESH -> null
+                LoadType.REFRESH -> {
+                    postsDao.clearAll()
+                    null
+                }
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
                     state.lastItemOrNull()
@@ -45,7 +48,12 @@ class PostsRemoteMediator(
 
             val posts = response.data.posts.map { it.toSimplePost() }
 
+
+
             appDatabase.withTransaction {
+                if (posts.isNotEmpty() && loadKey?.after == null) {
+                    postsDao.clearAll()
+                }
                 postsKeysDao.savePostsKeys(PostsKeys(0, response.data.after, response.data.before))
                 postsDao.insertAll(posts)
             }
