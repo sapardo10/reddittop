@@ -35,6 +35,11 @@ class MainActivity : AppCompatActivity() {
                 }
             )
         }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            postsAdapter.refresh()
+            binding.swipeRefresh.isRefreshing = false
+        }
         initializeObservers()
 
     }

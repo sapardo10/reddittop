@@ -19,7 +19,7 @@ class PostRepository @Inject constructor(
             PagingConfig(
                 pageSize = 15,
                 enablePlaceholders = false,
-                prefetchDistance = 3
+                prefetchDistance = 2
             ),
             remoteMediator = remoteMediator,
             pagingSourceFactory = { localDataSource.getAll() }
