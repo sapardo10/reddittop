@@ -6,12 +6,10 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.paypal.redditop.databinding.PostItemBinding
 import com.paypal.redditop.models.SimplePost
+import com.paypal.redditop.utils.load
 
-class PostsAdapter : PagingDataAdapter<SimplePost, PostsAdapter.PostsAdapterViewHolder>(SimplePostDiffUtilCallback()) {
-
-    /**
-     * ------------------------------------- PUBLIC METHODS ----------------------------------------
-     */
+class PostsAdapter :
+    PagingDataAdapter<SimplePost, PostsAdapter.PostsAdapterViewHolder>(SimplePostDiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsAdapterViewHolder {
         val itemBinding =
@@ -28,6 +26,8 @@ class PostsAdapter : PagingDataAdapter<SimplePost, PostsAdapter.PostsAdapterView
 
         fun bind(item: SimplePost) {
             binding.textView.text = item.title
+            binding.upVotes.text = item.upVotes.toString()
+            binding.image.load(binding.root.context, item.thumbnail)
         }
 
     }

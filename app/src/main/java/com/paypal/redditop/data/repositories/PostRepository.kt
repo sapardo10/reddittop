@@ -4,7 +4,6 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.paypal.redditop.data.database.PostDao
 import com.paypal.redditop.data.datasources.IPostLocalDataSource
 import com.paypal.redditop.models.SimplePost
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +17,7 @@ class PostRepository @Inject constructor(
     override fun getAllPosts(): Flow<PagingData<SimplePost>> {
         return Pager(
             PagingConfig(
-                pageSize = 25,
+                pageSize = 15,
                 enablePlaceholders = false,
                 prefetchDistance = 3
             ),

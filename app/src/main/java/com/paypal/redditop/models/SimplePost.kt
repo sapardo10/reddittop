@@ -9,4 +9,7 @@ data class SimplePost(
     val id: String,
     val thumbnail: String,
     val title: String,
+    val upVotes: Int,
+    val downVotes: Int,
+    val upVoteRatio: Double
 )

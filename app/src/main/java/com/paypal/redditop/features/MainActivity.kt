@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.paypal.redditop.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -16,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
-    private var postsAdapter = PostsAdapter()
+    private val postsAdapter = PostsAdapter()
     private lateinit var binding: ActivityMainBinding
 
     /**
@@ -27,12 +25,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        with(binding.list) {
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = postsAdapter
+        binding.list.apply {
             adapter = postsAdapter.withLoadStateHeaderAndFooter(
-                header = PostsLoadingAdapter { postsAdapter.retry() },
-                footer = PostsLoadingAdapter { postsAdapter.retry() }
+                header = PostsLoadingAdapter {
+                    postsAdapter.retry()
+                },
+                footer = PostsLoadingAdapter {
+                    postsAdapter.retry()
+                }
             )
         }
         initializeObservers()
