@@ -11,10 +11,6 @@ import com.paypal.redditop.utils.load
 class PostsAdapter :
     PagingDataAdapter<SimplePost, PostsAdapter.PostsAdapterViewHolder>(SimplePostDiffUtilCallback()) {
 
-    /**
-     * ------------------------------------- PUBLIC METHODS ----------------------------------------
-     */
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsAdapterViewHolder {
         val itemBinding =
             PostItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -30,6 +26,7 @@ class PostsAdapter :
 
         fun bind(item: SimplePost) {
             binding.textView.text = item.title
+            binding.upVotes.text = item.upVotes.toString()
             binding.image.load(binding.root.context, item.thumbnail)
         }
 

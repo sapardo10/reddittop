@@ -29,11 +29,7 @@ class PostsRemoteMediator(
     ): MediatorResult {
         return try {
             val loadKey = when (loadType) {
-                LoadType.REFRESH -> {
-                    state.lastItemOrNull()
-                        ?: return MediatorResult.Success(endOfPaginationReached = false)
-                    getPostsKeys()
-                }
+                LoadType.REFRESH -> null
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
                     state.lastItemOrNull()

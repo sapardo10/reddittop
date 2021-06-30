@@ -1,7 +1,6 @@
 package com.paypal.redditop.data.network
 
 import androidx.paging.PagingSource
-import androidx.paging.PagingState
 import com.paypal.redditop.data.mappers.toSimplePost
 import com.paypal.redditop.models.SimplePost
 import retrofit2.HttpException
@@ -31,10 +30,4 @@ class RemotePagingSource(
 
     override val keyReuseSupported: Boolean = true
 
-
-    override fun getRefreshKey(state: PagingState<String, SimplePost>): String? {
-        return state.anchorPosition?.let { anchorPosition ->
-            state.closestItemToPosition(anchorPosition)?.id
-        }
-    }
 }

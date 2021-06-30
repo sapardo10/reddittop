@@ -7,6 +7,9 @@ fun PostDto.toSimplePost(): SimplePost {
     return SimplePost(
         id = content.id,
         thumbnail = content.thumbnail,
-        title = content.title
+        title = content.title,
+        upVotes = content.ups,
+        downVotes = content.downs,
+        upVoteRatio = content.upvoteRatio
     )
 }
