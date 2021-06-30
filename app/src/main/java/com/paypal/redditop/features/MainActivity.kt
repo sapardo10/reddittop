@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.list.apply {
-            adapter = postsAdapter
             adapter = postsAdapter.withLoadStateHeaderAndFooter(
                 header = PostsLoadingAdapter {
                     postsAdapter.retry()

@@ -5,7 +5,7 @@ import com.paypal.redditop.models.SimplePost
 
 fun PostDto.toSimplePost(): SimplePost {
     return SimplePost(
-        id = content.id,
+        id = content.name,
         thumbnail = content.thumbnail,
         title = content.title,
         upVotes = content.ups,

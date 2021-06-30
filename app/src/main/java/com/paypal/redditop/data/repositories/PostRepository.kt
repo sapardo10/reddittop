@@ -17,7 +17,7 @@ class PostRepository @Inject constructor(
     override fun getAllPosts(): Flow<PagingData<SimplePost>> {
         return Pager(
             PagingConfig(
-                pageSize = 20,
+                pageSize = 15,
                 enablePlaceholders = false,
                 prefetchDistance = 3
             ),
