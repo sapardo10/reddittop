@@ -20,10 +20,9 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: MainViewModel by viewModels()
-
-    private var postsAdapter: PostsAdapter? = null
     private lateinit var binding: ActivityMainBinding
+    private var postsAdapter: PostsAdapter? = null
+    private val viewModel: MainViewModel by viewModels()
 
     /**
      * ------------------------------------ LIFECYCLE METHODS --------------------------------------
@@ -78,9 +77,8 @@ class MainActivity : AppCompatActivity() {
             thumbnailTransition,
             titleTransition
         )
-        intent.putExtra("url", simplePost.thumbnail)
-        intent.putExtra("title", simplePost.title)
-        intent.putExtra("id", simplePost.id)
+        intent.putExtra(DetailsActivity.POST_TITLE_KEY, simplePost.title)
+        intent.putExtra(DetailsActivity.POST_ID_KEY, simplePost.id)
         startActivity(intent, options.toBundle())
     }
 
