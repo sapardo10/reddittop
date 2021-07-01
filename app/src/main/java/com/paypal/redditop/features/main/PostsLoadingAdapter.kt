@@ -1,4 +1,4 @@
-package com.paypal.redditop.features
+package com.paypal.redditop.features.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

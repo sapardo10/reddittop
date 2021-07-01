@@ -1,4 +1,4 @@
-package com.paypal.redditop.features
+package com.paypal.redditop.features.main
 
 import androidx.recyclerview.widget.DiffUtil
 import com.paypal.redditop.models.SimplePost

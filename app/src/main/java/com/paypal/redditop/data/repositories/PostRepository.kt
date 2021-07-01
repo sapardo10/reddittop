@@ -26,4 +26,8 @@ class PostRepository @Inject constructor(
         ).flow
     }
 
+    override suspend fun getPost(id: String): SimplePost? {
+        return localDataSource.getPost(id)
+    }
+
 }
