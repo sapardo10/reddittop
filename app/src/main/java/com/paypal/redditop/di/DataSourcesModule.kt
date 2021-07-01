@@ -1,6 +1,6 @@
 package com.paypal.redditop.di
 
-import com.paypal.redditop.data.database.PostDao
+import com.paypal.redditop.data.database.AppDatabase
 import com.paypal.redditop.data.datasources.IPostLocalDataSource
 import com.paypal.redditop.data.datasources.IPostRemoteDataSource
 import com.paypal.redditop.data.datasources.PostLocalDataSource
@@ -17,10 +17,10 @@ object DataSourceModule {
 
     @Provides
     fun providePostLocalDataSource(
-        postDao: PostDao
+        appDatabase: AppDatabase
     ): IPostLocalDataSource {
         return PostLocalDataSource(
-            postsDao = postDao
+            appDatabase = appDatabase
         )
     }
 

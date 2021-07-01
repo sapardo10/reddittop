@@ -1,11 +1,8 @@
 package com.paypal.redditop.di
 
 import androidx.paging.ExperimentalPagingApi
-import com.paypal.redditop.data.database.AppDatabase
-import com.paypal.redditop.data.database.PostDao
-import com.paypal.redditop.data.database.PostsKeysDao
 import com.paypal.redditop.data.datasources.IPostLocalDataSource
-import com.paypal.redditop.data.network.RedditApi
+import com.paypal.redditop.data.datasources.IPostRemoteDataSource
 import com.paypal.redditop.data.repositories.IPostRepository
 import com.paypal.redditop.data.repositories.PostRepository
 import com.paypal.redditop.data.repositories.PostsRemoteMediator
@@ -32,16 +29,12 @@ object RepositoriesModule {
 
     @Provides
     fun providePostsRemoteMediator(
-        redditApi: RedditApi,
-        postsDao: PostDao,
-        postsKeysDao: PostsKeysDao,
-        appDatabase: AppDatabase
+        postLocalDataSource: IPostLocalDataSource,
+        postRemoteDataSource: IPostRemoteDataSource
     ): PostsRemoteMediator {
         return PostsRemoteMediator(
-            redditApi = redditApi,
-            postsDao = postsDao,
-            postsKeysDao = postsKeysDao,
-            appDatabase = appDatabase
+            postLocalDataSource = postLocalDataSource,
+            postRemoteDataSource = postRemoteDataSource
         )
     }
 }

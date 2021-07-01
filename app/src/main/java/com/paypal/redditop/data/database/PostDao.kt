@@ -10,8 +10,8 @@ import com.paypal.redditop.models.SimplePost
 @Dao
 interface PostDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(list: List<SimplePost>)
+    @Query("DELETE FROM posts")
+    suspend fun clearAll()
 
     @Query("SELECT * FROM posts")
     fun getAllPaged(): PagingSource<Int, SimplePost>
@@ -19,6 +19,6 @@ interface PostDao {
     @Query("SELECT * FROM posts WHERE id = :id")
     suspend fun getPost(id: String): SimplePost?
 
-    @Query("DELETE FROM posts")
-    suspend fun clearAll()
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(list: List<SimplePost>)
 }

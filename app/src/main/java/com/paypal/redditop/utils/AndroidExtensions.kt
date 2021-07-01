@@ -5,6 +5,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.paypal.redditop.core.RedditopConstants.validImageExtensions
 
 
 fun ImageView.load(
@@ -31,4 +32,8 @@ fun ImageView.load(
     builder
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .into(this)
+}
+
+fun String.isValidImageUrl(): Boolean {
+    return validImageExtensions.find { this.contains(it) } != null
 }
