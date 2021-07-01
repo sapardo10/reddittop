@@ -47,7 +47,9 @@
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:textAlignment="center"
         android:textSize="18sp"
         android:transitionName="title"
@@ -65,8 +67,8 @@
         android:layout_marginTop="12dp"
         android:textAlignment="center"
         android:textColor="?attr/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@id/title"
         tools:text="authorname" />
 
@@ -77,8 +79,8 @@
         android:layout_marginTop="12dp"
         android:textAlignment="center"
         android:textColor="?attr/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/author"
+        app:layout_constraintStart_toStartOf="@+id/author"
         app:layout_constraintTop_toBottomOf="@id/author"
         tools:text="r/nextfuckinglevel" />
 

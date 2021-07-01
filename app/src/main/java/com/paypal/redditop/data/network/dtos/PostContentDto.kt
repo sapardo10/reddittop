@@ -25,7 +25,7 @@ data class PostContentDto(
     @SerializedName("is_created_from_ads_ui") val isAds: Boolean,
     @SerializedName("author_premium") val authorPremium: Boolean,
     @SerializedName("thumbnail") val thumbnail: String,
-    @SerializedName("created") val created: Int,
+    @SerializedName("created") val created: Long,
     @SerializedName("likes") val likes: String,
     @SerializedName("view_count") val viewCount: String?,
     @SerializedName("archived") val archived: Boolean,
@@ -38,7 +38,7 @@ data class PostContentDto(
     @SerializedName("num_comments") val numComments: Int,
     @SerializedName("url") val url: String,
     @SerializedName("subreddit_subscribers") val subredditSubscribers: Int,
-    @SerializedName("created_utc") val createdUtc: Int,
+    @SerializedName("created_utc") val createdUtc: Long,
     @SerializedName("is_video") val isVideo: Boolean,
     @SerializedName("permalink") val postUrl: String,
     @SerializedName("url_overridden_by_dest") val imageUrl: String?
