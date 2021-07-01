@@ -19,7 +19,7 @@ data class SimplePost(
     val category: String,
     val subreddit: String,
     val subredditUrl: String,
-    val created: Int,
+    val created: Long,
     val isOriginalContent: Boolean,
     val isNsfw: Boolean,
     val isVideo: Boolean,

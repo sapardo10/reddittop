@@ -53,7 +53,6 @@ class DetailsActivity : AppCompatActivity() {
                     startActivity(browserIntent)
                 }
                 binding.content.video.isVisible = post.isVideo
-                binding.content.video.isVisible = post.isVideo
                 if (post.isVideo) {
 
                     binding.content.image.setBackgroundResource(R.color.black)
@@ -68,7 +67,16 @@ class DetailsActivity : AppCompatActivity() {
                     player?.setMediaItem(mediaItem)
                     player?.prepare()
                 } else {
-                    binding.content.image.load(this, post.image, post.thumbnail, fitCenter = true)
+                    if (post.thumbnail.isBlank()) {
+                        binding.content.image.setImageResource(R.drawable.ic_reddit_primary)
+                    } else {
+                        binding.content.image.load(
+                            this,
+                            post.image,
+                            post.thumbnail,
+                            fitCenter = true
+                        )
+                    }
                 }
                 binding.content.author.text = post.author
 
