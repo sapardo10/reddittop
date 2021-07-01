@@ -9,22 +9,22 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.paypal.redditop.core.RedditopConstants.validImageExtensions
 import java.util.concurrent.atomic.AtomicBoolean
 
-
+/**
+ * Method that loads an image from an url into the image views
+ */
 fun ImageView.load(
     context: Context,
     url: String,
     thumbnailUrl: String? = null,
-    cornerRadius: Int? = null,
-    fitCenter: Boolean = false
+    cornerRadius: Int? = null
 ) {
-    var builder = Glide.with(context).load(url)
+    val builder = Glide.with(context).load(url)
     thumbnailUrl?.let {
         builder.thumbnail(
             Glide.with(context)
                 .load(thumbnailUrl)
         )
     }
-
 
     cornerRadius?.let {
         builder
@@ -36,8 +36,11 @@ fun ImageView.load(
         .into(this)
 }
 
+/**
+ * Method that returns true if the string ends with any of the valid image formats. False otherwise
+ */
 fun String.isValidImageUrl(): Boolean {
-    return validImageExtensions.find { this.contains(it) } != null
+    return validImageExtensions.find { this.endsWith(it) } != null
 }
 
 /**

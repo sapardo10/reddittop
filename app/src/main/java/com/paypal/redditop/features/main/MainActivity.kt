@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import com.paypal.redditop.databinding.ActivityMainBinding
 import com.paypal.redditop.features.detail.DetailsActivity
@@ -32,6 +33,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initializePostsList()
+        setInteractionsListeners()
+        initializeObserverOverPosts()
+    }
+
+    /**
+     * ------------------------------------- PRIVATE METHODS ---------------------------------------
+     */
+
+    /**
+     * Method that initializes the [RecyclerView] and the [PostsAdapter] that paint the list of
+     * posts on the screen
+     */
+    private fun initializePostsList() {
         postsAdapter = PostsAdapter(
             this::onItemClicked
         )
@@ -39,34 +54,35 @@ class MainActivity : AppCompatActivity() {
             adapter = postsAdapter
             adapter = postsAdapter?.withLoadStateHeaderAndFooter(
                 header = PostsLoadingAdapter {
-                    postsAdapter?.retry()
+                    retryFetchData()
                 },
                 footer = PostsLoadingAdapter {
-                    postsAdapter?.retry()
+                    retryFetchData()
                 }
             )
-            postsAdapter?.addLoadStateListener { loadState ->
-                // Only show the list if refresh succeeds
-                binding.swipeRefresh.isVisible = loadState.mediator?.refresh is LoadState.NotLoading
-                // Show loading spinner during initial load or refresh
-                binding.progressBar.isVisible = loadState.mediator?.refresh is LoadState.Loading
-                // Show the retry state if initial load or refresh fails
-                binding.retryButton.isVisible = loadState.mediator?.refresh is LoadState.Error
-            }
+            postsAdapter?.addLoadStateListener(onAdapterLoadStateChanged())
 
             binding.retryButton.setOnClickListener {
-                postsAdapter?.retry()
+                retryFetchData()
             }
         }
-
-        binding.swipeRefresh.setOnRefreshListener {
-            postsAdapter?.refresh()
-            binding.swipeRefresh.isRefreshing = false
-        }
-        initializeObservers()
-
     }
 
+    /**
+     * Method that act as a callback for the different state changes that the [postsAdapter] can
+     * have and react accordingly
+     */
+    private fun onAdapterLoadStateChanged() = { loadState: CombinedLoadStates ->
+        binding.swipeRefresh.isVisible = loadState.mediator?.refresh is LoadState.NotLoading
+        binding.progressBar.isVisible = loadState.mediator?.refresh is LoadState.Loading
+        binding.retryButton.isVisible = loadState.mediator?.refresh is LoadState.Error
+    }
+
+    /**
+     * Method called when the user taps on one of the items of the screen
+     * @param simplePost [SimplePost] model that represents the item that was clicked
+     * @param view [View] that was clicked on the recycler view
+     */
     private fun onItemClicked(simplePost: SimplePost, view: View) {
         val intent = Intent(this, DetailsActivity::class.java)
 
@@ -82,17 +98,32 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent, options.toBundle())
     }
 
-    private fun initializeObservers() {
+    /**
+     * Method called when a reason is met to retry the fetch of the data in the adapter
+     */
+    private fun retryFetchData() {
+        postsAdapter?.retry()
+    }
+
+    /**
+     * Method that sets the listener for the interactions that this screen can have
+     */
+    private fun setInteractionsListeners() {
+        binding.swipeRefresh.setOnRefreshListener {
+            postsAdapter?.refresh()
+            binding.swipeRefresh.isRefreshing = false
+        }
+    }
+
+    /**
+     * Method that initializes the observer over the changes on the list of posts to update the
+     * list on the screen accordingly
+     */
+    private fun initializeObserverOverPosts() {
         lifecycleScope.launch {
             viewModel.getPosts().collectLatest {
                 postsAdapter?.submitData(it)
             }
         }
-        viewModel.actions.observe(this, {
-            when (it) {
-                is MainViewModelActions.NavigateToPostDetails -> {
-                }
-            }
-        })
     }
 }

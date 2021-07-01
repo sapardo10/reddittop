@@ -241,8 +241,7 @@ class DetailsActivity : AppCompatActivity() {
             binding.content.image.load(
                 this,
                 post.image,
-                post.thumbnail,
-                fitCenter = true
+                post.thumbnail
             )
         }
     }
