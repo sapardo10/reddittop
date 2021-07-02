@@ -14,6 +14,11 @@ class PostRepository @Inject constructor(
     private val remoteMediator: PostsRemoteMediator,
     private val localDataSource: IPostLocalDataSource
 ) : IPostRepository {
+
+    /**
+     * -------------------------------------- PUBLIC METHODS ---------------------------------------
+     */
+
     override fun getAllPosts(): Flow<PagingData<SimplePost>> {
         return Pager(
             PagingConfig(

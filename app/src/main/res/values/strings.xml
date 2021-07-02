@@ -1,12 +1,22 @@
 <resources>
     <string name="app_name">Redditop</string>
-    <string name="title_activity_details">DetailsActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="details_x_comments">%s \ncomments</string>
+    <string name="details_x_awards">%s \nawards</string>
+    <string name="main_network_error">There was an error while attempting to connect to the servers. Check your internet connection and try again</string>
+    <string name="retry">Retry</string>
+    <string name="post_image_description">Image of the post</string>
+    <string name="icon_description_down_votes">Icon representing the down votes of the post</string>
+    <string name="icon_description_comments">Icon representing the amount of comments the post has</string>
+    <string name="icon_description_up_votes">Image representing the up votes of the post</string>
+    <string name="icon_description_awards">Icon representing the amount of awards the post has</string>
+    <string name="details_open_post">See on Reddit</string>
+    <string name="icon_description_rewind">Icon representing the ability to rewind the video</string>
+    <string name="icon_description_play">Icon representing the capability if playing the video</string>
+    <string name="icon_description_pause">Icon representing the ability of pausing the video</string>
+    <string name="icon_description_fast_forward">Icon representing the ability to fast foward the video</string>
+    <string name="overlay">overlay</string>
+    <string name="icon_description_video">Icon representing that this item contains a video and can be reproduced</string>
+    <string name="nsfw">NSFW</string>
+    <string name="ad">Ad</string>
+    <string name="icon_description_votes">Icon representing the amount of upvotes the post has</string>
 </resources>

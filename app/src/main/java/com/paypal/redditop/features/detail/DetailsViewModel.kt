@@ -16,6 +16,15 @@ class DetailsViewModel @Inject constructor(
 
     val model = MutableLiveData<SimplePost?>()
 
+    /**
+     * ------------------------------------- PUBLIC METHODS ----------------------------------------
+     */
+
+    /**
+     * Method that retrieves the [SimplePost] with the id given as parameter and updates the [model]
+     * so the view can react accordingly
+     * @param id [String] of the [SimplePost] to be fetched
+     */
     fun getSimplePostDetails(id: String) {
         viewModelScope.launch {
             val post = getPostUseCase(id)

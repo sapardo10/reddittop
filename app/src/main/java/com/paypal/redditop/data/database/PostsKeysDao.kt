@@ -9,9 +9,9 @@ import com.paypal.redditop.models.PostsKeys
 @Dao
 interface PostsKeysDao {
 
-    @Insert(onConflict = REPLACE)
-    suspend fun savePostsKeys(redditKey: PostsKeys)
-
     @Query("SELECT * FROM keys ORDER BY id DESC")
     suspend fun getPostsKeys(): List<PostsKeys>
+
+    @Insert(onConflict = REPLACE)
+    suspend fun savePostsKeys(redditKey: PostsKeys)
 }

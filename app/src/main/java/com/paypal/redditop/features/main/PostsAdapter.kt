@@ -31,32 +31,30 @@ class PostsAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: SimplePost) {
-            binding.root.setOnClickListener {
-                onItemClicked(item, binding.root)
+            with(binding) {
+                root.setOnClickListener {
+                    onItemClicked(item, binding.root)
+                }
+                title.text = item.title
+                upVotes.text = item.upVotes.toString()
+                image.load(binding.root.context, item.thumbnail, cornerRadius = 25)
+                image.isVisible = item.thumbnail.isNotBlank()
+                overlay.isVisible = item.thumbnail.isNotBlank() && item.isVideo
+                playVideoIcon.isVisible = item.thumbnail.isNotBlank() && item.isVideo
+                subreddit.text = item.subreddit
+                nsfwBadge.isVisible = item.isNsfw
+                adBadge.isVisible = item.isAds
+                createdAt.text = getDate(milliSeconds = item.created)
             }
-            binding.title.text = item.title
-            binding.upVotes.text = item.upVotes.toString()
-            binding.image.load(binding.root.context, item.thumbnail, cornerRadius = 25)
-            binding.image.isVisible = item.thumbnail.isNotBlank()
-            binding.overlay.isVisible = item.thumbnail.isNotBlank() && item.isVideo
-            binding.playVideoIcon.isVisible = item.thumbnail.isNotBlank() && item.isVideo
-            binding.subreddit.text = item.subreddit
-            binding.nsfwBadge.isVisible = item.isNsfw
-            binding.adBadge.isVisible = item.isAds
-            binding.createdAt.text = getDate(milliSeconds = item.created, "dd MMM - hh:mm")
         }
 
         /**
          * Return date in specified format.
          * @param milliSeconds Date in milliseconds
-         * @param dateFormat Date format
          * @return String representing date in specified format
          */
-        fun getDate(milliSeconds: Long, dateFormat: String?): String? {
-            // Create a DateFormatter object for displaying date in specified format.
-            val formatter = SimpleDateFormat(dateFormat)
-
-            // Create a calendar object that will convert the date and time value in milliseconds to date.
+        private fun getDate(milliSeconds: Long): String? {
+            val formatter = SimpleDateFormat("dd MMM - hh:mm")
             val calendar: Calendar = Calendar.getInstance()
             calendar.timeInMillis = milliSeconds
             return formatter.format(calendar.time)
