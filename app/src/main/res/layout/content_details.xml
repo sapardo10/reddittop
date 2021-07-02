@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/post_image_description"
+        android:elevation="5dp"
+        android:scaleType="fitCenter"
+        android:transitionName="thumbnail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/video"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="5dp"
+        android:scaleType="centerInside"
+        android:transitionName="thumbnail"
+        android:visibility="gone"
+        app:controller_layout_id="@layout/custom_player_control_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="image,video" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:transitionName="title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrier"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="The friction in a rope when a cowboy lassos a bull" />
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textAlignment="center"
+        android:textColor="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:text="authorname" />
+
+    <TextView
+        android:id="@+id/subreddit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textAlignment="center"
+        android:textColor="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="@+id/author"
+        app:layout_constraintStart_toStartOf="@+id/author"
+        app:layout_constraintTop_toBottomOf="@id/author"
+        tools:text="r/nextfuckinglevel" />
+
+    <ImageView
+        android:id="@+id/up_votes_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/ic_up_arrow"
+        android:contentDescription="@string/icon_description_up_votes"
+        android:elevation="5dp"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/down_votes_image"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subreddit" />
+
+    <TextView
+        android:id="@+id/up_votes_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/up_votes_image"
+        app:layout_constraintEnd_toStartOf="@+id/down_votes_image"
+        app:layout_constraintStart_toEndOf="@+id/up_votes_image"
+        app:layout_constraintTop_toTopOf="@+id/up_votes_image"
+        tools:text="12564" />
+
+    <ImageView
+        android:id="@+id/down_votes_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_up_arrow"
+        android:contentDescription="@string/icon_description_down_votes"
+        android:elevation="5dp"
+        android:rotation="180"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@+id/up_votes_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/up_votes_image"
+        app:layout_constraintTop_toTopOf="@+id/up_votes_image" />
+
+    <ImageView
+        android:id="@+id/ic_comments"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/icon_description_comments"
+        android:src="@drawable/ic_message"
+        app:layout_constraintEnd_toStartOf="@+id/ic_trophy"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/up_votes_image" />
+
+    <ImageView
+        android:id="@+id/ic_trophy"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:contentDescription="@string/icon_description_awards"
+        android:src="@drawable/ic_trophy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ic_comments"
+        app:layout_constraintTop_toTopOf="@+id/ic_comments" />
+
+    <TextView
+        android:id="@+id/comments_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/ic_comments"
+        app:layout_constraintStart_toStartOf="@+id/ic_comments"
+        app:layout_constraintTop_toBottomOf="@+id/ic_comments"
+        tools:text="3400 \n comments" />
+
+    <TextView
+        android:id="@+id/trophy_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/ic_trophy"
+        app:layout_constraintStart_toStartOf="@+id/ic_trophy"
+        app:layout_constraintTop_toBottomOf="@+id/ic_trophy"
+        tools:text="34 \n awards" />
+
+    <Button
+        android:id="@+id/see_on_reddit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:drawableStart="@drawable/ic_reddit"
+        android:text="@string/details_open_post"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comments_text"
+        app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
